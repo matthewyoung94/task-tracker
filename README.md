@@ -80,72 +80,42 @@ Edit
   "status": "open"
 }
 
-4. Update Task Status
-URL: /tasks/{id}/status
+## 4. Update Task Status
+- **URL**: `/tasks/{id}/status`
+- **Method**: `PATCH`
+- **Description**: Update the status of a task.
+- **URL Params**:
+  - `id=[string]` (Required)
+- **Body**:
+  ```json
+  {
+    "status": "completed"
+  }
 
-Method: PATCH
+## 5. Delete Task
+- **URL**: `/tasks/{id}`
+- **Method**: `DELETE`
+- **Description**: Delete a task by its ID.
+- **URL Params**:
+  - `id=[string]` (Required)
+- **Response**:
+  - **Status Code**: 200 OK
+  - **Body**:
+    ```json
+    {
+      "message": "Task deleted successfully"
+    }
+    ```
 
-Description: Update the status of a task.
+---
 
-URL Params:
+## Example Request/Response
 
-id=[string] (Required)
+### Here's an example of how to **create a task** using `POST`:
 
-Body:
+#### Request:
 
-json
-Copy
-Edit
-{
-  "status": "completed"
-}
-Response:
-
-Status Code: 200 OK
-
-Body:
-
-json
-Copy
-Edit
-{
-  "id": "task_id_1",
-  "title": "Task Title",
-  "description": "Task description",
-  "dueDate": "2025-04-01T10:00",
-  "status": "completed"
-}
-5. Delete Task
-URL: /tasks/{id}
-
-Method: DELETE
-
-Description: Delete a task by its ID.
-
-URL Params:
-
-id=[string] (Required)
-
-Response:
-
-Status Code: 200 OK
-
-Body:
-
-json
-Copy
-Edit
-{
-  "message": "Task deleted successfully"
-}
-Example Request/Response
-Here's an example of how to create a task using POST:
-
-Request:
-
-bash
-Copy
-Edit
+```bash
 POST http://localhost:5050/api/tasks
 Content-Type: application/json
 
@@ -155,11 +125,9 @@ Content-Type: application/json
   "dueDate": "2025-07-01T14:00",
   "status": "open"
 }
+
 Response:
 
-json
-Copy
-Edit
 {
   "id": "sample_task_id",
   "title": "Sample Task",
@@ -167,3 +135,4 @@ Edit
   "dueDate": "2025-07-01T14:00",
   "status": "open"
 }
+
