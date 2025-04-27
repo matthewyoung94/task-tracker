@@ -12,6 +12,32 @@ export const getTaskById = async (req, res) => {
   res.json(task);
 };
 
+export const updateTask = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, dueDate, status } = req.body;
+
+  try {
+    const task = await prisma.task.update({
+      where: { id: id },
+      data: {
+        title,
+        description,
+        dueDate: new Date(dueDate),
+        status,
+      },
+    });
+
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+
+    res.status(200).json(task);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 export const createTask = async (req, res) => {
   const { title, description, status, dueDate } = req.body;
   if (!title || !dueDate) return res.status(400).json({ error: 'Title and dueDate required' });

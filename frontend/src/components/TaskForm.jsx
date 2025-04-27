@@ -15,10 +15,11 @@ function TaskForm() {
     }
 
     try {
+      const isoDueDate = new Date(dueDate).toISOString();
       await axios.post("http://localhost:5050/api/tasks", {
         title,
         description,
-        dueDate,
+        dueDate: isoDueDate,
         status: "open",
       });
       setTitle("");
